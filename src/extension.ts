@@ -2,14 +2,14 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as url from 'url';
-// import * as robotjs from 'robotjs';
+//import * as robotjs from 'robotjs';
 import { LoremIpsumService } from './Services/loremIpsumService';
 import { sleep, removeFirstLine } from './Helper/helper';
 
 export async function activate(context: vscode.ExtensionContext) {
 
 	let isProcessActive: boolean = false;
-	// robotjs.setKeyboardDelay(1000);
+	//robotjs.setKeyboardDelay(1000);
 	const currentPath:string = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0].uri.toString(): '';
 
 	let active = vscode.commands.registerCommand('desktime-hack.startDHack', async () => {
