@@ -42,7 +42,7 @@ export async function activate(context: vscode.ExtensionContext) {
 			vscode.commands.executeCommand('workbench.action.closeActiveEditor');
 
 			// Delete file
-			vscode.workspace.fs.readFile(vscode.Uri.file(filePath));
+			vscode.workspace.fs.delete(vscode.Uri.file(filePath));
 		}
 	});
 
@@ -52,8 +52,12 @@ export async function activate(context: vscode.ExtensionContext) {
 		else hActive = false;
 	});
 
-	vscode.workspace.onDidCloseTextDocument(document => {
-		console.log(document);
+	// vscode.workspace.onDidCloseTextDocument(document => {
+	// 	console.log(document);
+	// });
+
+	vscode.window.onDidChangeVisibleTextEditors(test => {
+		if(test.length <= 0) vscode.commands.executeCommand('desktime-hack.stopDHack');
 	});
 
 	context.subscriptions.push(active, deactive);
