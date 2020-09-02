@@ -2,19 +2,21 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as url from 'url';
+// import * as robotjs from 'robotjs';
 import { LoremIpsumService } from './Services/loremIpsumService';
-import { sleep, removeLastLine } from './Helper/helper';
+import { sleep, removeFirstLine } from './Helper/helper';
 
-let hActive: boolean = false;
 export async function activate(context: vscode.ExtensionContext) {
 
+	let isProcessActive: boolean = false;
+	// robotjs.setKeyboardDelay(1000);
 	const currentPath:string = vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0].uri.toString(): '';
 
 	let active = vscode.commands.registerCommand('desktime-hack.startDHack', async () => {
 		if (!currentPath) return vscode.window.showErrorMessage("No Workspace Is Current Active");
 
-		hActive = true;
-		while(hActive) {
+		isProcessActive = true;
+		while(isProcessActive) {
 			const time: string = new Date().getTime().toLocaleString();
 			const filePath: string = path.join(url.fileURLToPath(currentPath), `${ time }.ts`);
 			await fs.writeFileSync(filePath, "");
@@ -25,17 +27,17 @@ export async function activate(context: vscode.ExtensionContext) {
 
 			setTimeout(() => { doContinue = false; }, 1000 * 60 * 60);
 
-			while(doContinue && hActive) {
+			while(doContinue && isProcessActive) {
 				let fileData: any | string = await new LoremIpsumService().getRandomText();
 				fileData = fileData.data;
-				await fs.writeFileSync(filePath, fileData);
-				await sleep(3000);
-	
+				
 				while(fileData.length >= 1) {
-					fileData = removeLastLine(fileData);
-					await fs.writeFileSync(filePath, fileData);
+					// robotjs.typeString(fileData.split("\n").shift());
 					await sleep(3000);
+					fileData = removeFirstLine(fileData);
 				}
+
+				fs.writeFileSync(filePath, "");
 			}
 
 			// Close the editor
@@ -48,12 +50,16 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	let deactive = vscode.commands.registerCommand('desktime-hack.stopDHack', () => {
 		if (!currentPath) return vscode.window.showErrorMessage("No Workspace Is Current Active");
-		else if (!hActive) return vscode.window.showErrorMessage("Desktime hack is not active");
-		else hActive = false;
+		else if (!isProcessActive) return vscode.window.showErrorMessage("Desktime hack is not active");
+		else isProcessActive = false;
 	});
 
 	// vscode.workspace.onDidCloseTextDocument(document => {
 	// 	console.log(document);
+	// });
+
+	// vscode.workspace.onDidChangeTextDocument(change => {
+	// 	console.log(change.document);
 	// });
 
 	vscode.window.onDidChangeVisibleTextEditors(test => {
