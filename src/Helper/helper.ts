@@ -1,20 +1,40 @@
+import * as fs from 'fs';
+import * as vscode from 'vscode';
 
-const sleep = (ms: number): Promise<any> => {
-	return new Promise((resolve) => {
-	  setTimeout(resolve, ms);
-	});
-};
+export class Helper {
+	static sleep = (ms: number): Promise<any> => {
+		return new Promise((resolve) => {
+		  setTimeout(resolve, ms);
+		});
+	};
 
-const removeLines = (data: string, ...lines: number[]): string => {
-	return data.split("\n").filter((_, index) => lines.indexOf(index) === -1).join("\n");
-};
+	static removeLines = (data: string, ...lines: number[]): string => {
+		return data.split("\n").filter((_, index) => lines.indexOf(index) === -1).join("\n");
+	};
+	
+	static removeLastLine = (data: string): string => {
+		return data.split("\n").slice(1).join("\n");
+	};
+	
+	static removeFirstLine = (data: string): string => {
+		return data.split("\n").splice(0, 1).join("\n");
+	};
+	
+	static createTimeStamp = (): string => {
+		return new Date().getTime().toLocaleString();
+	};
+	
+	static createAFile = async (filePath: string): Promise<string> => {
+		try {
+			await fs.writeFileSync(filePath, "");
+			return filePath;
+		} catch(err) {
+			throw(err);
+		}
+	};
 
-const removeLastLine = (data: string): string => {
-	return data.split("\n").slice(1).join("\n");
-};
-
-const removeFirstLine = (data: string): string => {
-	return data.split("\n").splice(0, 1).join("\n");
-};
-
-export { sleep, removeLines, removeLastLine, removeFirstLine };
+	static openAFileInVSCode = (filePath: string) : void => {
+		const document: any = vscode.workspace.openTextDocument(vscode.Uri.file(filePath));
+		vscode.window.showTextDocument(document);
+	};
+}
