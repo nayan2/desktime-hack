@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as vscode from 'vscode';
 
 export class Helper {
+
 	static sleep = (ms: number): Promise<any> => {
 		return new Promise((resolve) => {
 		  setTimeout(resolve, ms);
@@ -20,7 +21,7 @@ export class Helper {
 		return data.split("\n").splice(0, 1).join("\n");
 	};
 	
-	static createTimeStamp = (): string => {
+	static currentTimeStamp = (): string => {
 		return new Date().getTime().toLocaleString();
 	};
 	
@@ -33,8 +34,16 @@ export class Helper {
 		}
 	};
 
-	static openAFileInVSCode = (filePath: string) : void => {
+	static openInEditor = (filePath: string) : void => {
 		const document: any = vscode.workspace.openTextDocument(vscode.Uri.file(filePath));
 		vscode.window.showTextDocument(document);
+	};
+
+	static getallFiles = (directoryPath: string): string[] => {
+		return fs.readdirSync(directoryPath);
+	};
+
+	static get currentWorkSpacePath(): string {
+		return vscode.workspace.workspaceFolders ? vscode.workspace.workspaceFolders[0].uri.toString(): "";
 	};
 }

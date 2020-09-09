@@ -28,35 +28,41 @@
 		"configuration": {
 			"title": "Desktime Hack Configuration",
 			"properties": {
-				"desktime-hack.randomTextGeneratorURL": {
+				"desktime-hack.randomTextGeneratorAPI": {
 					"type": "string",
 					"default": "http://api.seazon.org/1-1-1-1-1-0/0-0-1/2-9-45-85-3-4/api.txt",
-					"description": "Specifies the option to invoke a URL and get a random text and type in a file."
+					"scope": "window",
+					"description": "Specifies the option to invoke a API to get random texts to type in a file."
 				},
 				"desktime-hack.switchBetweenRandomFileGenerationAndTraverseAllFiles": {
 					"type": "boolean",
 					"default": true,
+					"scope": "window",
 					"description": "Specifies the option to switch back and forth between generating files randomly or traverse available files."
 				},
 				"desktime-hack.maxTimeToBeInAFile": {
 					"type": "integer",
 					"default": 60,
-					"description": "Specifies the option to be in a file and write. Measurement unit is minute."
+					"scope": "window",
+					"description": "Controls the dealy in minute after which writing will be stopped in current file and a new file will created."
 				},
 				"desktime-hack.filterFileTypes": {
 					"type": ["string", "null"],
 					"default": "html",
-					"description": "Specifies the option to filter certain file types and write."
+					"scope": "window",
+					"description": "Specifies the option to filter certain file types on which the operations will perform."
 				},
 				"desktime-hack.moveMouse": {
 					"type": "boolean",
 					"default": false,
-					"description": "Specifies the option to move the mouse over VS Code."
+					"scope": "window",
+					"description": "Controls the behavious of moving mouse over VS Code."
 				},
 				"desktime-hack.mouseMovementPixel": {
 					"type": "number",
 					"default": 1,
-					"description": "Specifies the option to what amount of pixel someone want to move the move every time."
+					"scope": "window",
+					"description": "Controls the behaviour of the number of pixels someone want to move on every operation."
 				}
 			}
 		}
