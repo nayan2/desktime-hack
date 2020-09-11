@@ -28,41 +28,86 @@
 		"configuration": {
 			"title": "Desktime Hack Configuration",
 			"properties": {
-				"desktime-hack.randomTextGeneratorAPI": {
+				"desktime-hack.keyboard.text.randomGeneratorAPI": {
 					"type": "string",
-					"default": "http://api.seazon.org/1-1-1-1-1-0/0-0-1/2-9-45-85-3-4/api.txt",
+					"format": "uri",
+					"default": "http://asdfast.beobit.net/api/@text",
 					"scope": "window",
-					"description": "Specifies the option to invoke a API to get random texts to type in a file."
+					"description": "Specifies the option to invoke a API to get random text to type in a file. If URL return an object then specifiy the target property with `@`symbol at the end of the url. Example `http://test.com//api@target.prop`"
 				},
-				"desktime-hack.switchBetweenRandomFileGenerationAndTraverseAllFiles": {
-					"type": "boolean",
-					"default": true,
+				"desktime-hack.keyboard.keyStrokeDelay": {
+					"type": "number",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 1,
 					"scope": "window",
-					"description": "Specifies the option to switch back and forth between generating files randomly or traverse available files."
+					"description": "Controls the delay in minute after every key press."
 				},
-				"desktime-hack.maxTimeToBeInAFile": {
-					"type": "integer",
-					"default": 60,
-					"scope": "window",
-					"description": "Controls the dealy in minute after which writing will be stopped in current file and a new file will created."
-				},
-				"desktime-hack.filterFileTypes": {
-					"type": ["string", "null"],
-					"default": "html",
-					"scope": "window",
-					"description": "Specifies the option to filter certain file types on which the operations will perform."
-				},
-				"desktime-hack.moveMouse": {
+				"desktime-hack.mouse.active": {
 					"type": "boolean",
 					"default": false,
 					"scope": "window",
-					"description": "Controls the behavious of moving mouse over VS Code."
+					"description": "Controls the behavious of moving mouse over active window."
 				},
-				"desktime-hack.mouseMovementPixel": {
+				"desktime-hack.mouse.movement": {
 					"type": "number",
 					"default": 1,
+					"minimum": 1,
+					"maximum": 10,
 					"scope": "window",
 					"description": "Controls the behaviour of the number of pixels someone want to move on every operation."
+				},
+				"desktime-hack.files.switchBetweenRandomAndAllExisting": {
+					"type": "boolean",
+					"default": false,
+					"scope": "window",
+					"description": "Specifies the option to switch back and forth between generating files randomly or traverse available files."
+				},
+				"desktime-hack.files.onlyRandom": {
+					"type": "boolean",
+					"default": true,
+					"scope": "window",
+					"description": "Specifies the option to traverse only random generated files. Only works if `#desktime-hack.files.switchBetweenRandomAndAllExisting#` is truned off."
+				},
+				"desktime-hack.files.onlyExisting": {
+					"type": "boolean",
+					"default": false,
+					"scope": "window",
+					"description": "Specifies the option to traverse only available files in the current workspace folder. Only works if `#desktime-hack.files.switchBetweenRandomAndAllExisting#` is truned off."
+				},
+				"desktime-hack.files.traverseDelay": {
+					"type": "integer",
+					"default": 1,
+					"minimum": 1,
+					"maximum": 10,
+					"scope": "window",
+					"description": "Controls the delay in minute after which the action will be recycled."
+				},
+				"desktime-hack.files.filter.fileTypes": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"title": "Inner Items"
+					},
+					"minItems": 1,
+					"default": [
+						"html"
+					],
+					"scope": "window",
+					"description": "Specifies the option to filter certain file types."
+				},
+				"desktime-hack.files.filter.excludeFolders": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"title": "Inner Items"
+					},
+					"minItems": 0,
+					"default": [
+						"node_modules"
+					],
+					"scope": "window",
+					"description": "Specifies the option to filter certain folder on which the action will not perform. The path should be a absulate or raltive path related to the current workspace."
 				}
 			}
 		}
@@ -78,6 +123,7 @@
 	},
 	"devDependencies": {
 		"@types/glob": "^7.1.3",
+		"@types/hidefile": "^3.0.0",
 		"@types/mocha": "^8.0.0",
 		"@types/node": "^14.0.27",
 		"@types/vscode": "^1.48.0",
@@ -93,6 +139,7 @@
 	},
 	"dependencies": {
 		"@nut-tree/nut-js": "^1.5.0",
-		"axios": "^0.19.0"
+		"axios": "^0.19.0",
+		"hidefile": "^3.0.0"
 	}
 }

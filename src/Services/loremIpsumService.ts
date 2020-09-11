@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { AppConfiguration } from '../configuration/appConfiguration';
+import { Helper } from '../Helper/helper';
 
 export class LoremIpsumService {
 
     getRandomText = (): Promise<any> => {
-        return axios.get(AppConfiguration.randomTextGeneratorAPI);
+        return axios.get(Helper.inspectTextGeneatorAPIResult().baseApi);
     };
 }
