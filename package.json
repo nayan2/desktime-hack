@@ -81,7 +81,7 @@
 					"minimum": 1,
 					"maximum": 10,
 					"scope": "window",
-					"description": "Controls the delay in minute after which the action will be recycled."
+					"description": "Controls the delay in minute after which the current action will be recycled."
 				},
 				"desktime-hack.files.filter.fileTypes": {
 					"type": "array",
