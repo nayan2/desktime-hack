@@ -41,13 +41,21 @@
 					"minimum": 0,
 					"maximum": 1,
 					"scope": "window",
-					"description": "Controls the delay in minute after every key press."
+					"description": "Controls the delay in minute between every key press."
 				},
 				"desktime-hack.mouse.active": {
 					"type": "boolean",
-					"default": false,
+					"default": true,
 					"scope": "window",
 					"description": "Controls the behavious of moving mouse over active window."
+				},
+				"desktime-hack.mouse.movementDelay": {
+					"type": "number",
+					"default": 0,
+					"minimum": 0,
+					"maximum": 1,
+					"scope": "window",
+					"description": "Controls the delay in minute in mouse movement."
 				},
 				"desktime-hack.mouse.movement": {
 					"type": "number",
@@ -129,7 +137,7 @@
 		"@types/vscode": "^1.48.0",
 		"@typescript-eslint/eslint-plugin": "^3.8.0",
 		"@typescript-eslint/parser": "^3.8.0",
-		"electron": "^7.3.2",
+		"electron": "^9.2.1",
 		"electron-rebuild": "^2.0.2",
 		"eslint": "^7.6.0",
 		"glob": "^7.1.6",
@@ -138,8 +146,9 @@
 		"vscode-test": "^1.4.0"
 	},
 	"dependencies": {
-		"@nut-tree/nut-js": "^1.5.0",
+		"@nut-tree/libnut": "^2.1.0",
 		"axios": "^0.19.0",
-		"hidefile": "^3.0.0"
+		"hidefile": "^3.0.0",
+		"robotjs": "^0.6.0"
 	}
 }

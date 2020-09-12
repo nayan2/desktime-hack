@@ -7,6 +7,10 @@ import { AppConfiguration } from '../configuration/appConfiguration';
 
 export class Helper {
 
+	static get currentWorkSpacePath(): string {
+		return workspace.workspaceFolders ? fileURLToPath(workspace.workspaceFolders[0].uri.toString()): "";
+	};
+
 	static sleep = (ms: number): Promise<any> => {
 		return new Promise((resolve) => {
 		  setTimeout(resolve, ms);
@@ -43,12 +47,12 @@ export class Helper {
 		window.showTextDocument(document);
 	};
 
-	static getallFiles = (directoryPath: string, arrayOfFiles: string[] = [], filterFileTypes: string[] = []): string[] => {
+	static getAllFiles = (directoryPath: string, arrayOfFiles: string[] = [], filterFileTypes: string[] = []): string[] => {
 		const rootFiles: string[] = fs.readdirSync(directoryPath);
 
 		rootFiles.filter(x => !(AppConfiguration.excludeFolders.includes(x.indexOf(Helper.currentWorkSpacePath) === -1 ? x : x.substring(x.indexOf(Helper.currentWorkSpacePath) + 2)) || isHiddenSync(join(directoryPath, '/', x)))).forEach((file: string) => {
 			if(fs.statSync(join(directoryPath, '/', file)).isDirectory()) {
-				arrayOfFiles = Helper.getallFiles(join(directoryPath, '/', file), arrayOfFiles, filterFileTypes);
+				arrayOfFiles = Helper.getAllFiles(join(directoryPath, '/', file), arrayOfFiles, filterFileTypes);
 			} else if (extname(join(directoryPath, '/', file)) !== '.map' && (filterFileTypes.length <= 0 || (filterFileTypes.length > 0 && filterFileTypes.map(x => x.replace('.', '')).includes(extname(join(directoryPath, '/', file)).replace('.', ''), 0)))) {
 				arrayOfFiles.push(join(directoryPath, '/', file));
 			}
@@ -57,7 +61,7 @@ export class Helper {
 		return arrayOfFiles;
 	};
 
-	static inspectTextGeneatorAPIResult = (): { containObjectResult: boolean, baseApi: string } => {
+	static inspectTextGeneatorAPI = (): { containObjectResult: boolean, baseApi: string } => {
 		const result: boolean = AppConfiguration.randomTextGeneratorAPI.lastIndexOf('@') !== -1;
 		return {
 			containObjectResult: result,
@@ -65,17 +69,13 @@ export class Helper {
 		};
 	};
 
-	static extractPropFromObject = (data: { [key: string]: any }, dotnotation: string = '', currentSelector: string = '', currentSelectorIndex: number = 0): any | string => {
+	static getPropertyFromObject = (data: { [key: string]: any }, dotnotation: string = '', currentSelector: string = '', currentSelectorIndex: number = 0): any | string => {
 		if(!dotnotation) {
 			const dotN: string = AppConfiguration.randomTextGeneratorAPI.substring(AppConfiguration.randomTextGeneratorAPI.lastIndexOf('@') + 1);
-			return Helper.extractPropFromObject(data, dotN, dotN.split('.')[0]);
+			return Helper.getPropertyFromObject(data, dotN, dotN.split('.')[0]);
 		} else {
 			if(dotnotation.split('.').length === currentSelectorIndex + 1) return data[currentSelector];
-			else return Helper.extractPropFromObject(data[currentSelector], dotnotation, dotnotation.split('.')[currentSelectorIndex++], currentSelectorIndex++);
+			else return Helper.getPropertyFromObject(data[currentSelector], dotnotation, dotnotation.split('.')[currentSelectorIndex++], currentSelectorIndex++);
 		}
-	};
-
-	static get currentWorkSpacePath(): string {
-		return workspace.workspaceFolders ? fileURLToPath(workspace.workspaceFolders[0].uri.toString()): "";
 	};
 }

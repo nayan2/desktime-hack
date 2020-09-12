@@ -4,6 +4,6 @@ import { Helper } from '../Helper/helper';
 export class LoremIpsumService {
 
     getRandomText = (): Promise<any> => {
-        return axios.get(Helper.inspectTextGeneatorAPIResult().baseApi);
+        return axios.get(Helper.inspectTextGeneatorAPI().baseApi);
     };
 }

@@ -1,9 +1,8 @@
 import * as vscode from 'vscode';
-import { projectDeatails } from '../Constants/AppConstants';
-import { parse } from 'path';
+import { appConstants } from '../Constants/AppConstants';
 
 export class AppConfiguration {
-    private static configuration: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration(projectDeatails.name);
+    private static configuration: vscode.WorkspaceConfiguration = vscode.workspace.getConfiguration(appConstants.project.details.name);
 
     static get randomTextGeneratorAPI(): string {
         return this.configuration.get<string>("keyboard.text.randomGeneratorAPI") || 'http://api.seazon.org/1-1-1-1-1-0/0-0-1/2-9-45-85-3-4/api.txt';
@@ -15,6 +14,10 @@ export class AppConfiguration {
 
     static get mouseActive(): boolean {
         return this.configuration.get<boolean>("mouse.active") || false;
+    }
+
+    static get mouseMovementDelay(): number {
+        return this.configuration.get<number>("mouse.movementDelay") || 0; 
     }
 
     static get mouseMovement(): number {
