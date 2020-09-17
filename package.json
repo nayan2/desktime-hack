@@ -59,11 +59,11 @@
 				},
 				"desktime-hack.mouse.movement": {
 					"type": "number",
-					"default": 1,
+					"default": 2,
 					"minimum": 1,
 					"maximum": 10,
 					"scope": "window",
-					"description": "Controls the behaviour of the number of pixels someone want to move on every operation."
+					"description": "Controls the behaviour of the number of pixel moves on every operation."
 				},
 				"desktime-hack.files.switchBetweenRandomAndAllExisting": {
 					"type": "boolean",
