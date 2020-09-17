@@ -6,7 +6,7 @@ export const appConstants = {
     },
     project: {
         details:{
-            name: 'desktime-hack'
+            name: 'robot-activity'
         }
     }
 };

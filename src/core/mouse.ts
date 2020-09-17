@@ -1,7 +1,7 @@
 import * as nut from '@nut-tree/libnut';
 import * as robot from 'robotjs';
 
-export default class Mouse {
+export class Mouse {
     static playWithMouse = (pixelGap: number): Promise<any> => {
         return new Promise((resolve) => {
             setTimeout(() => { 

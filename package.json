@@ -1,7 +1,7 @@
 {
-	"name": "desktime-hack",
-	"displayName": "Desktime Hack",
-	"description": "Its a hacking tool for desktime active time tracking app",
+	"name": "robot-activity",
+	"displayName": "Robot Activity",
+	"description": "Its a tool for mimicking one's day to day activity",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.48.0"
@@ -10,32 +10,32 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:desktime-hack.startDHack",
-		"onCommand:desktime-hack.stopDHack"
+		"onCommand:robot-activity.startRActivity",
+		"onCommand:robot-activity.stopRActivity"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "desktime-hack.startDHack",
-				"title": "Start Desktime Hack"
+				"command": "robot-activity.startRActivity",
+				"title": "Start Robot Activity"
 			},
 			{
-				"command": "desktime-hack.stopDHack",
-				"title": "Stop Desktime Hack"
+				"command": "robot-activity.stopRActivity",
+				"title": "Stop Robot Activity"
 			}
 		],
 		"configuration": {
-			"title": "Desktime Hack Configuration",
+			"title": "Robot Activity Configuration",
 			"properties": {
-				"desktime-hack.keyboard.text.randomGeneratorAPI": {
+				"robot-activity.keyboard.text.randomGeneratorAPI": {
 					"type": "string",
 					"format": "uri",
 					"default": "http://asdfast.beobit.net/api/@text",
 					"scope": "window",
 					"description": "Specifies the option to invoke a API to get random text to type in a file. If URL return an object then specifiy the target property with `@`symbol at the end of the url. Example `http://test.com//api@target.prop`"
 				},
-				"desktime-hack.keyboard.keyStrokeDelay": {
+				"robot-activity.keyboard.keyStrokeDelay": {
 					"type": "number",
 					"default": 0,
 					"minimum": 0,
@@ -43,13 +43,13 @@
 					"scope": "window",
 					"description": "Controls the delay in minute between every key press."
 				},
-				"desktime-hack.mouse.active": {
+				"robot-activity.mouse.active": {
 					"type": "boolean",
 					"default": true,
 					"scope": "window",
 					"description": "Controls the behavious of moving mouse over active window."
 				},
-				"desktime-hack.mouse.movementDelay": {
+				"robot-activity.mouse.movementDelay": {
 					"type": "number",
 					"default": 0,
 					"minimum": 0,
@@ -57,7 +57,7 @@
 					"scope": "window",
 					"description": "Controls the delay in minute in mouse movement."
 				},
-				"desktime-hack.mouse.movement": {
+				"robot-activity.mouse.movement": {
 					"type": "number",
 					"default": 2,
 					"minimum": 1,
@@ -65,25 +65,25 @@
 					"scope": "window",
 					"description": "Controls the behaviour of the number of pixel moves on every operation."
 				},
-				"desktime-hack.files.switchBetweenRandomAndAllExisting": {
+				"robot-activity.files.switchBetweenRandomAndAllExisting": {
 					"type": "boolean",
 					"default": false,
 					"scope": "window",
 					"description": "Specifies the option to switch back and forth between generating files randomly or traverse available files."
 				},
-				"desktime-hack.files.onlyRandom": {
+				"robot-activity.files.onlyRandom": {
 					"type": "boolean",
 					"default": true,
 					"scope": "window",
-					"description": "Specifies the option to traverse only random generated files. Only works if `#desktime-hack.files.switchBetweenRandomAndAllExisting#` is truned off."
+					"description": "Specifies the option to traverse only random generated files. Only works if `#robot-activity.files.switchBetweenRandomAndAllExisting#` is truned off."
 				},
-				"desktime-hack.files.onlyExisting": {
+				"robot-activity.files.onlyExisting": {
 					"type": "boolean",
 					"default": false,
 					"scope": "window",
-					"description": "Specifies the option to traverse only available files in the current workspace folder. Only works if `#desktime-hack.files.switchBetweenRandomAndAllExisting#` is truned off."
+					"description": "Specifies the option to traverse only available files in the current workspace folder. Only works if `#robot-activity.files.switchBetweenRandomAndAllExisting#` is truned off."
 				},
-				"desktime-hack.files.traverseDelay": {
+				"robot-activity.files.traverseDelay": {
 					"type": "integer",
 					"default": 1,
 					"minimum": 1,
@@ -91,7 +91,7 @@
 					"scope": "window",
 					"description": "Controls the delay in minute after which the current action will be recycled."
 				},
-				"desktime-hack.files.filter.fileTypes": {
+				"robot-activity.files.filter.fileTypes": {
 					"type": "array",
 					"items": {
 						"type": "string",
@@ -104,7 +104,7 @@
 					"scope": "window",
 					"description": "Specifies the option to filter certain file types."
 				},
-				"desktime-hack.files.filter.excludeFolders": {
+				"robot-activity.files.filter.excludeFolders": {
 					"type": "array",
 					"items": {
 						"type": "string",

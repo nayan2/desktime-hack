@@ -1,6 +1,6 @@
 import * as robot from 'robotjs';
 
-export default class KeyBoard {
+export class KeyBoard {
     static typeString = (string: string): Promise<any> => {
         return new Promise((resolve) => {
             setTimeout(() => {

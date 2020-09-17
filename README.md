@@ -1,6 +1,6 @@
-# desktime-hack README
+# robot-activity README
 
-This is the README for your extension "desktime-hack". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "robot-activity". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
