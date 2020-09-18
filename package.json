@@ -4,24 +4,24 @@
 	"description": "Its a tool for mimicking one's day to day activity",
 	"version": "0.0.1",
 	"engines": {
-		"vscode": "^1.48.0"
+		"vscode": "^1.49.0"
 	},
 	"categories": [
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:robot-activity.startRActivity",
-		"onCommand:robot-activity.stopRActivity"
+		"onCommand:robot-activity.start",
+		"onCommand:robot-activity.stop"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "robot-activity.startRActivity",
+				"command": "robot-activity.start",
 				"title": "Start Robot Activity"
 			},
 			{
-				"command": "robot-activity.stopRActivity",
+				"command": "robot-activity.stop",
 				"title": "Stop Robot Activity"
 			}
 		],

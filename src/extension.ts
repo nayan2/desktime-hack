@@ -19,7 +19,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	*/
 	let isProcessActive: boolean = false;
 
-	let active = vscode.commands.registerCommand('robot-activity.startDHack', async () => {
+	let active = vscode.commands.registerCommand('robot-activity.start', async () => {
 		/*
 			* First line of defance
 		*/
@@ -161,7 +161,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		}
 	});
 
-	let deactive = vscode.commands.registerCommand('robot-activity.stopDHack', async () => {
+	let deactive = vscode.commands.registerCommand('robot-activity.stop', async () => {
 		if (!Helper.currentWorkSpacePath) return vscode.window.showErrorMessage(appConstants.message.inActiveWorkSpace);
 		else  if (!isProcessActive) return vscode.window.showErrorMessage(appConstants.message.inActiveExtension);
 		else {
@@ -172,7 +172,7 @@ export async function activate(context: vscode.ExtensionContext) {
 	});
 
 	vscode.window.onDidChangeVisibleTextEditors(editors => {
-		if(editors.length <= 0) vscode.commands.executeCommand('robot-activity.stopDHack');
+		if(editors.length <= 0) vscode.commands.executeCommand('robot-activity.stop');
 	});
 
 	context.subscriptions.push(active, deactive);
